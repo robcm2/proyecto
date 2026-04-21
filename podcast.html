@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPod-IA | Panel del Docente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #ec4899;
+            --bg-dark: #0f172a;
+        }
+
+        body {
+            background-color: #f8fafc;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        .step-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .locked {
+            filter: grayscale(1);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .badge-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+            }
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Navegación -->
+    <nav class="bg-indigo-900 text-white p-4 shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-2 rounded-lg">
+                    <i class="fas fa-microphone-lines text-indigo-900 text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-tight">EduPod-IA</h1>
+                    <p class="text-[10px] uppercase tracking-widest text-indigo-300">Arquitectura de Narrativas</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:block">
+                    <p class="text-right text-xs text-indigo-200">Rango Actual</p>
+                    <p class="font-bold text-sm">Podcaster Académico Senior</p>
+                </div>
+                <div
+                    class="h-10 w-10 rounded-full border-2 border-indigo-400 flex items-center justify-center bg-indigo-800">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Header de Progreso Gamificado -->
+        <header class="mb-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-lg font-bold text-gray-800">Tu Mapa del Creador</h2>
+                    <span class="text-sm font-medium text-indigo-600">850 / 1200 EXP</span>
+                </div>
+                <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden">
+                    <div class="bg-indigo-600 h-full w-[70%] transition-all duration-1000"></div>
+                </div>
+                <div class="flex justify-between mt-2 text-[10px] text-gray-400 uppercase font-bold tracking-widest">
+                    <span>Novato</span>
+                    <span>Productor</span>
+                    <span>Experto Narrativo</span>
+                    <span>Maestro IA</span>
+                </div>
+            </div>
+            <div class="bg-indigo-600 p-6 rounded-3xl shadow-lg text-white flex items-center justify-between">
+                <div>
+                    <p class="text-xs opacity-80 uppercase font-bold">Insignia Activa</p>
+                    <h3 class="text-xl font-bold">Claridad Pedagógica</h3>
+                </div>
+                <div class="h-16 w-16 bg-white/20 rounded-full flex items-center justify-center text-3xl badge-pulse">
+                    <i class="fas fa-award"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Secciones del Framework -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+            <!-- Paso 1: Cerebro / Guionización -->
+            <button onclick="switchTab('guion')"
+                class="step-card bg-white p-6 rounded-3xl text-left border-2 border-indigo-100 hover:border-indigo-500 group">
+                <div
+                    class="h-12 w-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">1. El Cerebro</h3>
+                <p class="text-xs text-gray-500 mb-4">Transformación didáctica con GPT-EduPodcast.</p>
+                <div
+                    class="flex items-center gap-2 text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md w-fit">
+                    <i class="fas fa-check-circle"></i> COMPLETADO
+                </div>
+            </button>
+
+            <!-- Paso 2: Voz y Audio -->
+            <button onclick="switchTab('audio')"
+                class="step-card bg-white p-6 rounded-3xl text-left border-2 border-indigo-500 shadow-md">
+                <div class="h-12 w-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mb-4">
+                    <i class="fas fa-waveform"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">2. El Exoesqueleto</h3>
+                <p class="text-xs text-gray-500 mb-4">Síntesis vocal y clonación ElevenLabs.</p>
+                <div
+                    class="flex items-center gap-2 text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md w-fit">
+                    <i class="fas fa-spinner fa-spin"></i> EN CURSO
+                </div>
+            </button>
+
+            <!-- Paso 3: Identidad Visual -->
+            <button onclick="switchTab('visual')"
+                class="step-card bg-white p-6 rounded-3xl text-left border-2 border-transparent hover:border-indigo-500 group">
+                <div
+                    class="h-12 w-12 bg-pink-50 text-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-pink-600 group-hover:text-white transition-colors">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">3. Aura Visual</h3>
+                <p class="text-xs text-gray-500 mb-4">Integración con Canva para portadas y MP4.</p>
+                <div class="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded-md w-fit">
+                    PENDIENTE
+                </div>
+            </button>
+
+            <!-- Paso 4: Ética y LMS -->
+            <button onclick="switchTab('etica')"
+                class="step-card bg-white p-6 rounded-3xl text-left border-2 border-transparent hover:border-red-500 group locked">
+                <div
+                    class="h-12 w-12 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">4. Escudo Ético</h3>
+                <p class="text-xs text-gray-500 mb-4">Verificación de alucinaciones y Moodle/N8N.</p>
+                <i class="fas fa-lock text-gray-300"></i>
+            </button>
+        </div>
+
+        <!-- Contenido Dinámico de los Módulos -->
+        <main class="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden min-h-[500px]">
+
+            <!-- Módulo 1: Guionización -->
+            <div id="tab-guion" class="tab-content hidden p-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Laboratorio de Transposición Didáctica</h2>
+                        <label class="block text-sm font-bold text-gray-600 mb-2">Pega aquí el contenido denso
+                            (PDF/Libro):</label>
+                        <textarea
+                            class="w-full h-48 p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm text-gray-700"
+                            placeholder="Ej: Las leyes del aprendizaje según Thorndike..."></textarea>
+                        <button onclick="simulateAI('guion')"
+                            class="mt-4 bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-indigo-700 transition-colors">
+                            <i class="fas fa-magic"></i> Humanizar con IA
+                        </button>
+                    </div>
+                    <div class="w-full md:w-80 bg-indigo-50 p-6 rounded-3xl border border-indigo-100">
+                        <h4 class="font-bold text-indigo-800 mb-4 flex items-center gap-2">
+                            <i class="fas fa-robot"></i> Sugerencia IA
+                        </h4>
+                        <div id="ai-suggestion" class="text-xs text-indigo-900 leading-relaxed space-y-3">
+                            <p>Esperando contenido para procesar...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Módulo 2: Audio -->
+            <div id="tab-audio" class="tab-content p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Estudio de Voz: Cognición Distribuida</h2>
+                        <div class="space-y-6">
+                            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                <p class="text-sm font-bold text-gray-700 mb-2">Seleccionar Socio Vocal:</p>
+                                <div class="flex gap-4">
+                                    <div class="p-3 bg-white border-2 border-indigo-500 rounded-xl flex-1 text-center">
+                                        <i class="fas fa-user-tie mb-2"></i>
+                                        <p class="text-[10px] font-bold">Voz Clonada (Tú)</p>
+                                    </div>
+                                    <div
+                                        class="p-3 bg-white border border-gray-200 rounded-xl flex-1 text-center opacity-50">
+                                        <i class="fas fa-robot mb-2"></i>
+                                        <p class="text-[10px] font-bold">Narrador Neutro</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-sm font-bold text-gray-700 block mb-2">Ajuste de Prosodia
+                                    Emocional:</label>
+                                <input type="range" class="w-full accent-indigo-600">
+                                <div class="flex justify-between text-[10px] font-bold text-gray-400 mt-1">
+                                    <span>ACADÉMICO</span>
+                                    <span>CONVERSACIONAL</span>
+                                    <span>ENTUSIASTA</span>
+                                </div>
+                            </div>
+                            <button onclick="simulateAI('audio')"
+                                class="w-full bg-black text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2">
+                                <i class="fas fa-play"></i> Sintetizar Píldora de Conocimiento
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-3xl p-6 text-white">
+                        <div class="flex justify-between items-center mb-6">
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-indigo-400">Rúbrica Cualitativa
+                                IA</h4>
+                            <span class="bg-indigo-500/20 text-indigo-300 text-[10px] px-2 py-1 rounded">Análisis en
+                                Tiempo Real</span>
+                        </div>
+                        <div id="audio-stats" class="space-y-6">
+                            <div class="flex justify-between text-sm">
+                                <span>Claridad Didáctica</span>
+                                <span class="text-indigo-400">Pendiente...</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Calidez Humana</span>
+                                <span class="text-indigo-400">Pendiente...</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Engagement Auditivo</span>
+                                <span class="text-indigo-400">Pendiente...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Módulo 4: Ética -->
+            <div id="tab-etica" class="tab-content hidden p-8">
+                <div class="max-w-2xl mx-auto text-center">
+                    <div
+                        class="h-20 w-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                        <i class="fas fa-shield-heart"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Compromiso Ético del Docente</h2>
+                    <p class="text-gray-500 mb-8">Antes de enviar a Moodle, verifica la integridad del socio cognitivo.
+                    </p>
+
+                    <div class="space-y-4 text-left mb-8">
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                            <input type="checkbox"
+                                class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <label class="text-sm text-gray-700">He verificado las fuentes y descartado alucinaciones de
+                                la IA.</label>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                            <input type="checkbox"
+                                class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <label class="text-sm text-gray-700">Incluí la declaración de uso de IA generativa en los
+                                créditos finales.</label>
+                        </div>
+                    </div>
+
+                    <button
+                        class="bg-green-600 text-white px-10 py-4 rounded-2xl font-bold flex items-center gap-2 mx-auto hover:bg-green-700">
+                        <i class="fas fa-cloud-upload"></i> Publicar en LMS y Notificar (vía N8N)
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer Inclusivo -->
+    <footer class="mt-20 border-t border-gray-200 bg-white py-10 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-xs text-gray-400">
+                &copy; 2024 EduPod-IA | Diseño de Cognición Distribuida
+            </div>
+            <div class="flex gap-4">
+                <div class="bg-gray-100 p-2 rounded-lg text-gray-500 text-xs flex items-center gap-2">
+                    <i class="fas fa-closed-captioning"></i> Transcripciones Automáticas ON
+                </div>
+                <div class="bg-gray-100 p-2 rounded-lg text-gray-500 text-xs flex items-center gap-2">
+                    <i class="fas fa-universal-access"></i> Accesibilidad AAA
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            // No permitir entrar a ética si no está desbloqueado (simulación)
+            if (tabId === 'etica' && document.getElementById('tab-etica').parentElement.classList.contains('locked')) {
+                return;
+            }
+
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        function simulateAI(type) {
+            if (type === 'guion') {
+                const suggestion = document.getElementById('ai-suggestion');
+                suggestion.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analizando texto académico...';
+
+                setTimeout(() => {
+                    suggestion.innerHTML = `
+                        <div class="animate-fade-in">
+                            <p class="font-bold mb-2">Transformación Detectada:</p>
+                            <p>"Tu texto sobre Psicología del Aprendizaje es excelente. Te sugiero empezar con la analogía de la 'computadora defectuosa' para explicar el sesgo cognitivo."</p>
+                            <div class="mt-4 p-2 bg-white rounded-lg border border-indigo-100">
+                                <strong>Tip de Microlearning:</strong> Mantén este episodio bajo los 4:30 minutos.
+                            </div>
+                        </div>
+                    `;
+                }, 1500);
+            }
+
+            if (type === 'audio') {
+                const stats = document.getElementById('audio-stats');
+                stats.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando rúbrica cualitativa...';
+
+                setTimeout(() => {
+                    stats.innerHTML = `
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs">Claridad Didáctica</span>
+                                <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="bg-green-500 h-full w-[95%]"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs">Calidez Humana</span>
+                                <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="bg-indigo-500 h-full w-[80%]"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs">Originalidad</span>
+                                <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="bg-yellow-500 h-full w-[100%]"></div>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-xl">
+                                <p class="text-[10px] text-indigo-300 italic">"¡Fantástico! Tu entonación en el minuto 1:20 crea un anclaje emocional fuerte. El módulo de Ética ha sido desbloqueado."</p>
+                            </div>
+                        </div>
+                    `;
+                    // Desbloqueamos el siguiente paso
+                    document.querySelector('.locked').classList.remove('locked');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>
